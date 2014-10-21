@@ -1,8 +1,8 @@
-## This source files has functions that cache the inverse of a matrix.
+## This source file contains functions that cache the inverse of a matrix.
 ## For these functions to work, it is assumed that the matrix supplied is always invertible.
 
-## This function creates a special "matrix" object that can cache its inverse.
 
+## This function creates a special "matrix" object that can cache its inverse.
 makeCacheMatrix <- function(x = matrix()) {
 
     ## initialize inverse as null (default)
@@ -35,19 +35,29 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
     
-    ## Check if the matrix is already cached
+    ## get the inverse matrix
     m <- x$getinv()
+
+    ## Check for previously cached 
     if(!is.null(m)) {
         ## inverse is already cached
         message("returning cached matrix")
+
+        ## Return a matrix that is the inverse of 'x'
         return(m)
     }
     
-    ## Perform inverse matrix
+    ## New matrix,pPerform inverse matrix
+
+    ## Get matrix to be inverted
     data <- x$get()
+
+    ## Invert matrix using solve()
     m <- solve(data, ...)
+
     ## cache inverse
     x$setinv(m)
+
     ## Return a matrix that is the inverse of 'x'
     m
 }
